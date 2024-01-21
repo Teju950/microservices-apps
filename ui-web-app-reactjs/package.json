@@ -59,7 +59,5 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --env.dev --progress"
   },
   "main": "after-compile-plugin.js",
-  "dependencies": {
-    "request": "^2.88.2"
-  }
+  "dependencies": {}
 }

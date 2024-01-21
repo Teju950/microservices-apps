@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactjs
+spec:
+  selector:
+    matchLabels:
+      app: reactjs
+  template:
+    metadata:
+      labels:
+        app: reactjs
+    spec:
+      containers:
+      - name: reactjs
+        image: <Image>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

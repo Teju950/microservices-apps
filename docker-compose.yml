@@ -1,0 +1,27 @@
+
+version: '3'
+services:
+  reactjs:
+    image: teju792/dockerpractice:v1
+    ports:
+      - "8000:8080"
+  nodejs:
+    image: teju792/dockerpractice2:v2
+    ports:
+      - "8002:1004" 
+  springboot:
+    image: teju792/dockerpractice3:v3
+    ports:
+      - "8003:1001" 
+  shoesspringboot:
+    image: teju792/dockerpractice4:v4
+    ports:
+      - "8004:1002"  
+  python:
+    image: teju792/dockerpractice5:v5
+    ports:
+      - "8005:1003"  
+  gateway:
+    image: teju792/dockerpractice6:v6
+    ports:
+      - "8006:9999"              

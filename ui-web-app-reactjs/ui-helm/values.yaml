@@ -1,11 +1,11 @@
 
-replicaCount: 1
+replicaCount: 2
 
 image:
-  repository: deekshithsn/ui
+  repository: teju792/dockerpracticee
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v1"
 
 service:
   type: NodePort
