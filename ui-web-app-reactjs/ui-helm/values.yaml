@@ -2,10 +2,11 @@
 replicaCount: 2
 
 image:
-  repository: teju792/dockerpracticee
+  repository: "teju792/dockerpracticee"
+  tag: "v1"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1"
+
 
 service:
   type: NodePort
@@ -13,4 +14,4 @@ service:
   targetport: 8080
 
 container:
-  name: react-ui
+  name: "react-ui"

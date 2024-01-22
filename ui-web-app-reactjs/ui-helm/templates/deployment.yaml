@@ -15,8 +15,8 @@ spec:
         {{- include "ui-helm.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: {{ .Values.container.name | quote}}
-          image: {{ .Values.container.name | quote }}
+        - name: {{ .Values.container.name }}
+          image: {{ .Values.image.repository }}:{{.Values.image.tag}}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetport }}
