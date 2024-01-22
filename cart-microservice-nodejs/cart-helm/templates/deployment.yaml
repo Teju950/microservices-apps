@@ -15,7 +15,7 @@ spec:
         {{- include "cart-helm.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: {{ .Values.conatiner.name }}
+        - name: {{ .Values.container.name }}
           image: {{ .Values.image.repository }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

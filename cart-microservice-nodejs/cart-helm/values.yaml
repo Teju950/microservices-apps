@@ -1,7 +1,7 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
-  repository: deekshithsn/cart
+  repository: teju792/dockerpractice2:v2
   pullPolicy: IfNotPresent
   
 service:
@@ -10,5 +10,5 @@ service:
   targetport: 1004
   name: cart
 
-conatiner:
+container:
   name: cart-ui
