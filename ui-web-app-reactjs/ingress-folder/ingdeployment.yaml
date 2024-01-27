@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactjsapp-deployment
+  labels:
+    app: reactjs-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reactjs-app
+  template:
+    metadata:
+      labels:
+        app: reactjs-app
+    spec:
+      containers:
+        - name: reactjs
+          image: teju792/dockerpracticee:v1
+          ports:
+            - containerPort: 8080
