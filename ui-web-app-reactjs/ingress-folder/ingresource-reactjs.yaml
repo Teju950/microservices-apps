@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingressreactjs-resource
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: reactjs.myonlineapplication.work.gd
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: reactjs-service
+                port:
+                  number: 8080
+          - path: /hello
+            pathType: Prefix
+            backend:
+              service:
+                name: pythonrestapi-pythonproject
+                port:
+                  number: 9001                
+  tls:
+    - hosts:
+        - reactjs.myonlineapplication.work.gd
+      secretName: haaruu-secrets
