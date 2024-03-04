@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NEW_TAG_VALUE', description: 'Enter the new tag value')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Current User: ${env.USER}"
+               sh 'echo passed'
+                git branch: 'helm-charts', credentialsId: 'gitcredentials', url: 'https://github.com/Teju950/microservices-apps.git'
+            }
+        }
+
+        stage('Update Tag in values.yaml') {
+            steps {
+                // Modify the values.yaml file to update the tag
+                dir('shoes-microservice-spring-boot'){
+                script {
+                    // Define the new tag value from the parameter
+                    def newTag = params.NEW_TAG_VALUE
+                    
+                                        // Use sed to update the tag in values.yaml
+                    sh "sed -i 's/tag: .*/tag: ${newTag}/' shoes-microservice-spring-boot/shoeshelm/values.yaml"
+                }
+            }
+        }
+            
+    }
+        stage('Update Remote URL') {
+            environment {
+                GIT_CREDENTIALS = credentials('gitcredentials')
+                REPOSITORY_URL = 'https://github.com/Teju950/microservices-apps.git'        
+            }
+            steps {
+                script {
+                    def credentials = env.GIT_CREDENTIALS
+                    def parts = credentials.split(':')
+                    def username = parts[0]
+                    def token = parts[1]
+                    
+                    // Update the Git remote URL with username and token
+                    sh "git remote set-url origin https://${username}:${token}@${env.REPOSITORY_URL}"
+                    sh 'git push --set-upstream origin main'
+                }
+            }
+        }
+        stage('Commit Changes') {
+            steps {
+                dir('shoes-microservice-spring-boot'){
+                // Commit the changes back to the repository
+                sh 'git add shoes-microservice-spring-boot-svc/values.yaml'
+                sh 'git commit -m "Update tag in values.yaml"'
+                sh 'git push'
+            }
+        }
+        }
+    }
+}
